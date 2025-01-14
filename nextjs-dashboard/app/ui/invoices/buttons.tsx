@@ -26,13 +26,12 @@ export function UpdateInvoice({ id }: { id: string }) {
 }
 
 export function DeleteInvoice({ id }: { id: string }) {
-  const deleteInvoiceWithId = async (formData: FormData) => {
+  const deleteInvoiceWithId = async () => {
     try {
       const response = await deleteInvoice(id); // Call the deleteInvoice function with the ID.
       
-      // Check the response and handle it accordingly.
       if (response && response.message) {
-        console.log(response.message); // Log the success message (or handle it as needed).
+        console.log(response.message); // Log the success message or handle it as needed.
       } else {
         throw new Error('Unexpected response format from deleteInvoice');
       }
@@ -43,8 +42,7 @@ export function DeleteInvoice({ id }: { id: string }) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Prevent the default form submission.
-    const formData = new FormData(event.currentTarget); // Extract form data if needed.
-    await deleteInvoiceWithId(formData); // Call the async delete handler.
+    await deleteInvoiceWithId(); // Call the async delete handler.
   };
 
   return (
@@ -56,3 +54,4 @@ export function DeleteInvoice({ id }: { id: string }) {
     </form>
   );
 }
+
